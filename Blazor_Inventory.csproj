@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BlazorMaterialIcons" Version="0.0.1" />
+  </ItemGroup>
+
 </Project>

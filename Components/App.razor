@@ -16,6 +16,17 @@
 <body>
     <Routes />
     <script src="_framework/blazor.web.js"></script>
+    <script>
+        window.addClickOutsideListener = (dotNetHelper) => {
+        document.addEventListener('click', function handleClickOutside(event) {
+            const dropdown = document.querySelector('#user-menu-button');
+            if (dropdown && !dropdown.contains(event.target)) {
+                dotNetHelper.invokeMethodAsync('CloseDropdown');
+                document.removeEventListener('click', handleClickOutside);
+            }
+        });
+    };
+    </script>
 </body>
 
 </html>

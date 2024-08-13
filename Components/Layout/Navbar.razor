@@ -1,4 +1,5 @@
 @rendermode InteractiveServer
+@inject IJSRuntime JS
 
 <nav class="bg-gray-800">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -80,14 +81,22 @@
 </nav>
 
 @code {
-    private bool userSettingsOpen = false;
-    private bool mobileMenuToggle = false;
+  private bool userSettingsOpen = false;
+  private bool mobileMenuToggle = false;
 
-    private void toggleMobileMenu() {
-      mobileMenuToggle = !mobileMenuToggle;
-    }
+  private void toggleMobileMenu() {
+    mobileMenuToggle = !mobileMenuToggle;
+  }
 
-    private void toggleUserSettingsOpen() {
-        userSettingsOpen = !userSettingsOpen;
+  private void toggleUserSettingsOpen() {
+    userSettingsOpen = !userSettingsOpen;
+    if (userSettingsOpen) {
+      JS.InvokeVoidAsync("addClickOutsideListener", DotNetObjectReference.Create(this));
     }
+  }
+  [JSInvokable]
+  public void CloseDropdown() {
+    userSettingsOpen = false;
+    StateHasChanged();
+  }
 }
